@@ -1,11 +1,13 @@
 import React from 'react';
-import { render } from 'react-dom';
+import {
+  render
+} from 'react-dom';
 
 // Styles
 import css from './styles/style.styl';
 
 // Components
-import Main from './components/main';
+import App from './components/app';
 import Single from './components/single';
 import PhotoGrid from './components/photo-grid';
 
@@ -16,20 +18,29 @@ import {
   IndexRoute,
   browserHistory
 } from 'react-router';
+import {
+  Provider
+} from 'react-redux';
+import store, {
+  history
+} from './store';
 
 const router = (
-  <Router
-    history={browserHistory}>
-      <Route
-        path="/"
-        component={Main}>
-          <IndexRoute
-            component={PhotoGrid} />
+  <Provider
+    store={store}>
+      <Router
+        history={history}>
           <Route
-            path="/view/:postId"
-            component={Single} />
-      </Route>
-  </Router>
+            path="/"
+            component={App}>
+              <IndexRoute
+                component={PhotoGrid} />
+              <Route
+                path="/view/:postId"
+                component={Single} />
+          </Route>
+      </Router>
+  </Provider>
 )
 
 render(
