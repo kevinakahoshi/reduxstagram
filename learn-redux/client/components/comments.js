@@ -12,6 +12,7 @@ const Comments = React.createClass({
             </strong>
             {comment.text}
             <button
+              onClick={() => this.props.removeComment(this.props.params.postId, index)}
               className="remove-comment">
                 &times;
             </button>
@@ -25,6 +26,7 @@ const Comments = React.createClass({
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
     this.props.addComment(postId, author, comment);
+    this.refs.commentForm.reset();
   },
   render() {
     return (
