@@ -21,7 +21,14 @@ const defaultState = {
   comments
 };
 
-const store = createStore(rootReducer, defaultState);
+const enhancers = compose(
+  // Check for the dev tools extension
+  window.devToolsExtension
+    ? window.devToolsExtension()
+    : (store) => store
+);
+
+const store = createStore(rootReducer, defaultState, enhancers);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
